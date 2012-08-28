@@ -23,6 +23,8 @@
 #import "ZFont.h"
 #import "ZAttributedStringPrivate.h"
 
+static NSMutableCharacterSet *rfAlphaCharSet;
+
 @interface ZFont (ZFontPrivate)
 @property (nonatomic, readonly) CGFloat ratio;
 @end
@@ -456,8 +458,7 @@ static CGSize drawOrSizeTextConstrainedToSize(BOOL performDraw, NSString *string
 	
 	READ_GLYPHS();
 	
-	NSMutableCharacterSet *alphaCharset = [NSMutableCharacterSet alphanumericCharacterSet];
-	[alphaCharset addCharactersInString:@"'\u2019\u02BC"]; // apostrophes
+	NSMutableCharacterSet *alphaCharset = rfAlphaCharSet;
 	
 	// scan left-to-right looking for newlines or until we hit the width constraint
 	// When we hit a wrapping point, calculate truncation as follows:
@@ -758,6 +759,13 @@ static CGSize drawTextInRect(CGRect rect, NSString *text, NSArray *attributes, U
 }
 
 @implementation NSString (FontLabelStringDrawing)
+
++(void)load
+{
+    rfAlphaCharSet = [NSMutableCharacterSet alphanumericCharacterSet];
+	[rfAlphaCharSet addCharactersInString:@"'\u2019\u02BC"]; // apostrophes
+}
+
 // CGFontRef-based methods
 - (CGSize)sizeWithCGFont:(CGFontRef)font pointSize:(CGFloat)pointSize {
 	return [self sizeWithZFont:[ZFont fontWithCGFont:font size:pointSize]];
