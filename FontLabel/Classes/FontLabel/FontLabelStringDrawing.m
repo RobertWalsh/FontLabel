@@ -762,7 +762,7 @@ static CGSize drawTextInRect(CGRect rect, NSString *text, NSArray *attributes, U
 
 +(void)load
 {
-    rfAlphaCharSet = [NSMutableCharacterSet alphanumericCharacterSet];
+    rfAlphaCharSet = [[NSMutableCharacterSet alphanumericCharacterSet] retain];
 	[rfAlphaCharSet addCharactersInString:@"'\u2019\u02BC"]; // apostrophes
 }
 
