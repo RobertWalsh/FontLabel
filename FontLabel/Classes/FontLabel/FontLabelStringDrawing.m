@@ -639,17 +639,19 @@ static CGSize drawOrSizeTextConstrainedToSize(BOOL performDraw, NSString *string
 				// draw
 				if (performDraw) {
 					switch (alignment) {
-						case NSTextAlignmentLeft:
+						case UITextAlignmentLeft:
 							drawPoint.x = 0;
 							break;
-						case NSTextAlignmentCenter:
+						case UITextAlignmentCenter:
 							drawPoint.x = (constrainedSize.width - lineSize.width) / 2.0f;
 							break;
-						case NSTextAlignmentRight:
+						case UITextAlignmentRight:
 							drawPoint.x = constrainedSize.width - lineSize.width;
 							break;
+#ifdef __IPHONE_6_0
                         case NSTextAlignmentJustified:
                         case NSTextAlignmentNatural:
+#endif
                         default:
                             break;                            
 					}

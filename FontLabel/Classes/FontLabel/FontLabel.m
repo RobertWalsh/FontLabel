@@ -119,16 +119,19 @@
 			size.width = MIN(size.width, origSize.width);
 			// adjust the point for alignment
 			switch (self.textAlignment) {
-				case NSTextAlignmentLeft:
+				case UITextAlignmentLeft:
 					break;
-				case NSTextAlignmentCenter:
+				case UITextAlignmentCenter:
 					point.x += (origSize.width - size.width) / 2.0f;
 					break;
-				case NSTextAlignmentRight:
+				case UITextAlignmentRight:
 					point.x += origSize.width - size.width;
 					break;
+                    
+#ifdef __IPHONE_6_0
                 case NSTextAlignmentJustified:
                 case NSTextAlignmentNatural:
+#endif
                 default:
                     break;
 			}
