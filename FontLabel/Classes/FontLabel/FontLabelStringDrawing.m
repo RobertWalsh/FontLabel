@@ -367,7 +367,7 @@ static void readRunInformation(NSArray *attributes, NSUInteger len, CFMutableDic
 }
 
 static CGSize drawOrSizeTextConstrainedToSize(BOOL performDraw, NSString *string, NSArray *attributes, CGSize constrainedSize, NSUInteger maxLines,
-											  UILineBreakMode lineBreakMode, UITextAlignment alignment, BOOL ignoreColor) {
+											  UILineBreakMode lineBreakMode, NSTextAlignment alignment, BOOL ignoreColor) {
 	NSUInteger len = [string length];
 	NSUInteger idx = 0;
 	CGPoint drawPoint = CGPointZero;
@@ -639,15 +639,19 @@ static CGSize drawOrSizeTextConstrainedToSize(BOOL performDraw, NSString *string
 				// draw
 				if (performDraw) {
 					switch (alignment) {
-						case UITextAlignmentLeft:
+						case NSTextAlignmentLeft:
 							drawPoint.x = 0;
 							break;
-						case UITextAlignmentCenter:
+						case NSTextAlignmentCenter:
 							drawPoint.x = (constrainedSize.width - lineSize.width) / 2.0f;
 							break;
-						case UITextAlignmentRight:
+						case NSTextAlignmentRight:
 							drawPoint.x = constrainedSize.width - lineSize.width;
 							break;
+                        case NSTextAlignmentJustified:
+                        case NSTextAlignmentNatural:
+                        default:
+                            break;                            
 					}
 					NSUInteger stopGlyphIdx = glyphIdx;
 					NSUInteger lastRunIdx = currentRunIdx;
