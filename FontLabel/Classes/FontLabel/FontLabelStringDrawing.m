@@ -367,7 +367,7 @@ static void readRunInformation(NSArray *attributes, NSUInteger len, CFMutableDic
 }
 
 static CGSize drawOrSizeTextConstrainedToSize(BOOL performDraw, NSString *string, NSArray *attributes, CGSize constrainedSize, NSUInteger maxLines,
-											  UILineBreakMode lineBreakMode, NSTextAlignment alignment, BOOL ignoreColor) {
+											  UILineBreakMode lineBreakMode, UITextAlignment alignment, BOOL ignoreColor) {
 	NSUInteger len = [string length];
 	NSUInteger idx = 0;
 	CGPoint drawPoint = CGPointZero;
